@@ -1,6 +1,7 @@
 package com.diego.livrosb.entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -34,7 +35,7 @@ public class Livro implements Serializable {
 
 	public Livro(Long id) {
 		this.id = -1L;
-	}	
+	}
 
 	public Livro(Long id, String titulo, Integer numeroDePaginas, Date publicadoEm, Double precoDeVenda) {
 		super();
@@ -43,7 +44,7 @@ public class Livro implements Serializable {
 		this.numeroDePaginas = numeroDePaginas;
 		this.publicadoEm = publicadoEm;
 		this.precoDeVenda = precoDeVenda;
-	}	
+	}
 
 	public Livro(String titulo, Integer numeroDePaginas, Date publicadoEm, Double precoDeVenda) {
 		super();
@@ -52,7 +53,6 @@ public class Livro implements Serializable {
 		this.publicadoEm = publicadoEm;
 		this.precoDeVenda = precoDeVenda;
 	}
-	
 
 	public Long getId() {
 		return id;
@@ -88,7 +88,20 @@ public class Livro implements Serializable {
 
 	public void setPrecoDeVenda(Double precoDeVenda) {
 		this.precoDeVenda = precoDeVenda;
-	}	
+	}
+
+	public String getAnoMesDePublicacao() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+		String dataFormatada = sdf.format(publicadoEm);
+
+		String ano = dataFormatada.substring(6, 10);
+
+		String mes = dataFormatada.substring(3, 5);
+
+		return ano + "/" + mes;
+
+	}
 
 	@Override
 	public int hashCode() {
