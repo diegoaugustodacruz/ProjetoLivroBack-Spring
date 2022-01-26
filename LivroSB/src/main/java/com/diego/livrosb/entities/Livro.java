@@ -32,6 +32,10 @@ public class Livro implements Serializable {
 
 	}
 
+	public Livro(Long id) {
+		this.id = -1L;
+	}	
+
 	public Livro(Long id, String titulo, Integer numeroDePaginas, Date publicadoEm, Double precoDeVenda) {
 		super();
 		this.id = id;
@@ -39,14 +43,19 @@ public class Livro implements Serializable {
 		this.numeroDePaginas = numeroDePaginas;
 		this.publicadoEm = publicadoEm;
 		this.precoDeVenda = precoDeVenda;
+	}	
+
+	public Livro(String titulo, Integer numeroDePaginas, Date publicadoEm, Double precoDeVenda) {
+		super();
+		this.titulo = titulo;
+		this.numeroDePaginas = numeroDePaginas;
+		this.publicadoEm = publicadoEm;
+		this.precoDeVenda = precoDeVenda;
 	}
+	
 
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getTitulo() {
@@ -79,7 +88,7 @@ public class Livro implements Serializable {
 
 	public void setPrecoDeVenda(Double precoDeVenda) {
 		this.precoDeVenda = precoDeVenda;
-	}
+	}	
 
 	@Override
 	public int hashCode() {
