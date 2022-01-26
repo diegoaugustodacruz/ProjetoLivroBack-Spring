@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,10 +44,16 @@ public class LivroResource {
 		return ResponseEntity.created(uri).body(obj);
 
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> excluirPeloId(@PathVariable Long id){
+	public ResponseEntity<Void> excluirPeloId(@PathVariable Long id) {
 		service.excluirPeloId(id);
 		return ResponseEntity.noContent().build();
+	}
+
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<Livro> Atualizar(@PathVariable Long id, @RequestBody Livro obj) {
+		obj = service.atualizar(id, obj);
+		return ResponseEntity.ok().body(obj);
 	}
 }

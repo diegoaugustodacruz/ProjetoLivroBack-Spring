@@ -32,4 +32,17 @@ public class LivroService {
 		repository.deleteById(id);
 	}
 	
+	public Livro atualizar(Long id, Livro obj) {
+		Livro entity = repository.getOne(id);
+		atualizarDados(entity, obj);
+		return repository.save(entity);
+	}
+
+	private void atualizarDados(Livro entity, Livro obj) {
+		entity.setTitulo(obj.getTitulo());
+		entity.setNumeroDePaginas(obj.getNumeroDePaginas());
+		entity.setPublicadoEm(obj.getPublicadoEm());
+		entity.setPrecoDeVenda(obj.getPrecoDeVenda());
+	}
+	
 }
