@@ -28,4 +28,8 @@ public class LivroService {
 		return repository.save(obj);
 	}
 	
+	public void excluirPeloId(Long id) {
+		repository.deleteById(id);
+	}
+	
 }
