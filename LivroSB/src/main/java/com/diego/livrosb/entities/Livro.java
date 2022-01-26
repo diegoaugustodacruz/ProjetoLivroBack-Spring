@@ -9,7 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "tb_livro")
@@ -25,9 +29,14 @@ public class Livro implements Serializable {
 
 	private Integer numeroDePaginas;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT")
 	private Date publicadoEm;
 
 	private Double precoDeVenda;
+
+	@ManyToOne
+	@JoinColumn(name = "categoria_id")
+	private Categoria categoria;
 
 	public Livro() {
 
@@ -37,13 +46,15 @@ public class Livro implements Serializable {
 		this.id = -1L;
 	}
 
-	public Livro(Long id, String titulo, Integer numeroDePaginas, Date publicadoEm, Double precoDeVenda) {
+	public Livro(Long id, String titulo, Integer numeroDePaginas, Date publicadoEm, Double precoDeVenda,
+			Categoria categoria) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.numeroDePaginas = numeroDePaginas;
 		this.publicadoEm = publicadoEm;
 		this.precoDeVenda = precoDeVenda;
+		this.categoria = categoria;
 	}
 
 	public Livro(String titulo, Integer numeroDePaginas, Date publicadoEm, Double precoDeVenda) {
@@ -88,6 +99,14 @@ public class Livro implements Serializable {
 
 	public void setPrecoDeVenda(Double precoDeVenda) {
 		this.precoDeVenda = precoDeVenda;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	public String getAnoMesDePublicacao() {
