@@ -24,4 +24,8 @@ public class LivroService {
 		return obj.get();
 	}
 	
+	public Livro salvar(Livro obj) {
+		return repository.save(obj);
+	}
+	
 }
