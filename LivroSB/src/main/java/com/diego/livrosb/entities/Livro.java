@@ -1,6 +1,7 @@
 package com.diego.livrosb.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
@@ -32,7 +33,7 @@ public class Livro implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT")
 	private Date publicadoEm;
 
-	private Double precoDeVenda;
+	private BigDecimal precoDeVenda;
 
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
@@ -46,7 +47,7 @@ public class Livro implements Serializable {
 		this.id = -1L;
 	}
 
-	public Livro(Long id, String titulo, Integer numeroDePaginas, Date publicadoEm, Double precoDeVenda,
+	public Livro(Long id, String titulo, Integer numeroDePaginas, Date publicadoEm, BigDecimal precoDeVenda,
 			Categoria categoria) {
 		super();
 		this.id = id;
@@ -57,7 +58,7 @@ public class Livro implements Serializable {
 		this.categoria = categoria;
 	}
 
-	public Livro(String titulo, Integer numeroDePaginas, Date publicadoEm, Double precoDeVenda) {
+	public Livro(String titulo, Integer numeroDePaginas, Date publicadoEm, BigDecimal precoDeVenda) {
 		super();
 		this.titulo = titulo;
 		this.numeroDePaginas = numeroDePaginas;
@@ -93,11 +94,11 @@ public class Livro implements Serializable {
 		this.publicadoEm = publicadoEm;
 	}
 
-	public Double getPrecoDeVenda() {
+	public BigDecimal getPrecoDeVenda() {
 		return precoDeVenda;
 	}
 
-	public void setPrecoDeVenda(Double precoDeVenda) {
+	public void setPrecoDeVenda(BigDecimal precoDeVenda) {
 		this.precoDeVenda = precoDeVenda;
 	}
 
