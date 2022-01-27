@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.diego.livrosb.entities.Livro;
 import com.diego.livrosb.repositories.LivroRepository;
+import com.diego.livrosb.services.exceptions.RegistroNaoEncontradoException;
 
 @Service
 public class LivroService {
@@ -21,7 +22,7 @@ public class LivroService {
 	
 	public Livro encontrarPeloId(Long id) {
 		Optional<Livro> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new RegistroNaoEncontradoException(id));
 	}
 	
 	public Livro salvar(Livro obj) {
