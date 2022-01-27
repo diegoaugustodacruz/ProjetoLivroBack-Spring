@@ -3,6 +3,8 @@ package com.diego.livrosb.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -44,9 +46,14 @@ public class LivroService {
 	}
 	
 	public Livro atualizar(Long id, Livro obj) {
-		Livro entity = repository.getOne(id);
-		atualizarDados(entity, obj);
-		return repository.save(entity);
+		try {
+			Livro entity = repository.getOne(id);
+			atualizarDados(entity, obj);
+			return repository.save(entity);
+			
+		}catch(EntityNotFoundException e) {
+			throw new RegistroNaoEncontradoException(id);
+		}
 	}
 
 	private void atualizarDados(Livro entity, Livro obj) {
