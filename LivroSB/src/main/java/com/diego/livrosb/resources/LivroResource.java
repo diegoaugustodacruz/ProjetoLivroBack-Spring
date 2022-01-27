@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.diego.livrosb.entities.AnoMes;
 import com.diego.livrosb.entities.Livro;
 import com.diego.livrosb.services.LivroService;
 
@@ -86,5 +87,18 @@ public class LivroResource {
 		service.excluirTodos();
 		return ResponseEntity.noContent().build();
 	}
+	
+	
+	@GetMapping(value = "/tituloContendo/{titulo}")
+	public ResponseEntity<List<Livro>> obterTituloContendo(@PathVariable String titulo) {
+		List<Livro> list = service.obterTituloContendo(titulo);
+		return ResponseEntity.ok().body(list);
+	}
+	
+//	@GetMapping(value = "/{ano}/{mes}")
+//	public ResponseEntity<AnoMes> obterPublicadosEm(@PathVariable String ano, @PathVariable String mes) {
+//		List<Livro> list = service.obterPublicadosEm();
+//		return ResponseEntity.ok().body(list);
+//	}
 	
 }

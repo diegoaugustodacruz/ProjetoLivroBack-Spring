@@ -1,5 +1,6 @@
 package com.diego.livrosb.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.diego.livrosb.entities.AnoMes;
 import com.diego.livrosb.entities.Livro;
 import com.diego.livrosb.repositories.LivroRepository;
 import com.diego.livrosb.services.exceptions.DatabaseException;
@@ -98,6 +100,27 @@ public class LivroService {
 	public void excluirTodos() {
 		repository.deleteAll();
 
+	}	
+	
+	public List<Livro> obterTituloContendo(String termo){
+		List<Livro> obj = repository.findByTituloContaining(termo);
+		return obj;
 	}
+	
+//	public List<Livro> obterPublicadosEm(AnoMes referencia){		
+//	
+//		List<Livro> banco = repository.findAll();
+//		
+//		List<Livro> novaLista = new ArrayList<>();
+//		
+//		for(Livro c : banco) {
+//			AnoMes anoMes = c.getAnoMesDePublicacao();
+//			if(referencia == anoMes){
+//				novaLista.add(c);
+//			}
+//		}
+//		
+//		return novaLista;
+//	}
 
 }

@@ -110,7 +110,7 @@ public class Livro implements Serializable {
 		this.categoria = categoria;
 	}
 
-	public String getAnoMesDePublicacao() {
+	public AnoMes getAnoMesDePublicacao() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 		String dataFormatada = sdf.format(publicadoEm);
@@ -118,8 +118,10 @@ public class Livro implements Serializable {
 		String ano = dataFormatada.substring(6, 10);
 
 		String mes = dataFormatada.substring(3, 5);
+		
+		AnoMes anoMes = new AnoMes(ano, mes);
 
-		return ano + "/" + mes;
+		return anoMes;
 
 	}
 
@@ -140,4 +142,11 @@ public class Livro implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 
+	@Override
+	public String toString() {
+		return "Livro [id=" + id + ", titulo=" + titulo + ", numeroDePaginas=" + numeroDePaginas + ", publicadoEm="
+				+ publicadoEm + ", precoDeVenda=" + precoDeVenda + ", categoria=" + categoria + "]";
+	}
+
+	
 }
