@@ -100,27 +100,30 @@ public class LivroService {
 	public void excluirTodos() {
 		repository.deleteAll();
 
-	}	
-	
-	public List<Livro> obterTituloContendo(String termo){
+	}
+
+	public List<Livro> obterTituloContendo(String termo) {
 		List<Livro> obj = repository.findByTituloContaining(termo);
 		return obj;
 	}
-	
-//	public List<Livro> obterPublicadosEm(AnoMes referencia){		
-//	
-//		List<Livro> banco = repository.findAll();
-//		
-//		List<Livro> novaLista = new ArrayList<>();
-//		
-//		for(Livro c : banco) {
-//			AnoMes anoMes = c.getAnoMesDePublicacao();
-//			if(referencia == anoMes){
-//				novaLista.add(c);
-//			}
-//		}
-//		
-//		return novaLista;
-//	}
+
+	public List<Livro> obterPublicadosEm(AnoMes anoMes) {
+
+		List<Livro> banco = repository.findAll();
+
+		List<Livro> novaLista = new ArrayList<>();
+
+		String ano = anoMes.getAno();
+		String mes = anoMes.getMes();
+		String anoMesFormatado = ano + "/" + mes;
+
+		for (Livro c : banco) {
+			if (anoMesFormatado.equalsIgnoreCase(c.getAnoMesDePublicacao().toString())) {
+				novaLista.add(c);
+			}
+		}
+
+		return novaLista;
+	}
 
 }

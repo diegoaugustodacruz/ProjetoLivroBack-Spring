@@ -95,10 +95,13 @@ public class LivroResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
-//	@GetMapping(value = "/{ano}/{mes}")
-//	public ResponseEntity<AnoMes> obterPublicadosEm(@PathVariable String ano, @PathVariable String mes) {
-//		List<Livro> list = service.obterPublicadosEm();
-//		return ResponseEntity.ok().body(list);
-//	}
+	@GetMapping(value = "/obterPublicadosEm/{ano}/{mes}")
+	public ResponseEntity<List<Livro>> obterPublicadosEm(@PathVariable  String ano, @PathVariable  String mes) {
+		AnoMes anoMes = new AnoMes(ano, mes);
+		List<Livro> list = service.obterPublicadosEm(anoMes);
+		return ResponseEntity.ok().body(list);
+	}
+	
+
 	
 }

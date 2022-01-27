@@ -39,7 +39,7 @@ public class TestConfig implements CommandLineRunner{
 		categoriaRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
 		Livro l1 = new Livro(null, "Harry Potter", 200, sdf.parse("25/01/2000"), new BigDecimal(200.00), c1);
-		Livro l2 = new Livro(null, "Senhor dos Anéis", 300, sdf.parse("27/04/2004"), new BigDecimal(300.00), c1);
+		Livro l2 = new Livro(null, "Senhor dos Anéis", 300, sdf.parse("27/01/2000"), new BigDecimal(300.00), c1);
 		Livro l3 = new Livro(null, "Sapiens", 400, sdf.parse("05/06/2011"), new BigDecimal(400.00), c3);
 		Livro l4 = new Livro(null, "O Hobbit", 500, sdf.parse("08/09/2009"),new BigDecimal(500.00), c2);
 		Livro l5 = new Livro(null, "The Witcher", 600, sdf.parse("06/07/2015"), new BigDecimal(600.00), c1);
