@@ -56,4 +56,35 @@ public class LivroResource {
 		obj = service.atualizar(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}
+	
+	@DeleteMapping
+	public ResponseEntity<Void> excluir(@RequestBody Livro obj) {
+		service.excluir(obj);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping(value = "/contarTodos")
+	public ResponseEntity<Long> contarTodos() {
+		Long cont = service.contarTodos();
+		return ResponseEntity.ok().body(cont);
+	}
+	
+	@GetMapping(value = "/estaVazio")
+	public ResponseEntity<Boolean> estaVazio() {
+		Boolean estaVazio = service.estaVazio();
+		return ResponseEntity.ok().body(estaVazio);
+	}
+	
+	@GetMapping(value = "/naoEstaVazio")
+	public ResponseEntity<Boolean> naoEstaVazio() {
+		Boolean naoEstaVazio = service.naoEstaVazio();
+		return ResponseEntity.ok().body(naoEstaVazio);
+	}
+	
+	@DeleteMapping(value = "/excluirTodos")
+	public ResponseEntity<Void> excluirTodos() {
+		service.excluirTodos();
+		return ResponseEntity.noContent().build();
+	}
+	
 }

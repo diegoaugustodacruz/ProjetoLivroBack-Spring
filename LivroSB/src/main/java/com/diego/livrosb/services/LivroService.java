@@ -20,38 +20,38 @@ public class LivroService {
 
 	@Autowired
 	private LivroRepository repository;
-	
-	public List<Livro> obterTodos(){
+
+	public List<Livro> obterTodos() {
 		return repository.findAll();
 	}
-	
+
 	public Livro encontrarPeloId(Long id) {
 		Optional<Livro> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new RegistroNaoEncontradoException(id));
 	}
-	
+
 	public Livro salvar(Livro obj) {
 		return repository.save(obj);
 	}
-	
+
 	public void excluirPeloId(Long id) {
 		try {
 			repository.deleteById(id);
-			
-		}catch(EmptyResultDataAccessException e) {
+
+		} catch (EmptyResultDataAccessException e) {
 			throw new RegistroNaoEncontradoException(id);
-		}catch(DataIntegrityViolationException e) {
+		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
-	
+
 	public Livro atualizar(Long id, Livro obj) {
 		try {
 			Livro entity = repository.getOne(id);
 			atualizarDados(entity, obj);
 			return repository.save(entity);
-			
-		}catch(EntityNotFoundException e) {
+
+		} catch (EntityNotFoundException e) {
 			throw new RegistroNaoEncontradoException(id);
 		}
 	}
@@ -62,5 +62,42 @@ public class LivroService {
 		entity.setPublicadoEm(obj.getPublicadoEm());
 		entity.setPrecoDeVenda(obj.getPrecoDeVenda());
 	}
-	
+
+	public void excluir(Livro obj) {
+		try {
+			repository.delete(obj);
+			;
+
+		} catch (EmptyResultDataAccessException e) {
+			throw new RegistroNaoEncontradoException(obj.getId());
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseException(e.getMessage());
+		}
+	}
+
+	public Long contarTodos() {
+		return repository.count();
+	}
+
+	public Boolean estaVazio() {
+		if (repository.count() >= 1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public Boolean naoEstaVazio() {
+		if (repository.count() >= 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void excluirTodos() {
+		repository.deleteAll();
+
+	}
+
 }
