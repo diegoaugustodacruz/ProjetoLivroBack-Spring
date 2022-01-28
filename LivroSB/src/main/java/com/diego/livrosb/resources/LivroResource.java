@@ -101,6 +101,10 @@ public class LivroResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
-
+	@GetMapping(value = "/obterPublicadosEmV")
+	public ResponseEntity<List<Livro>> obterPublicadosEm(@RequestBody AnoMes[] anoMes) {
+		List<Livro> list = service.obterPublicadosEm(anoMes);
+		return ResponseEntity.ok().body(list);
+	}
 	
 }

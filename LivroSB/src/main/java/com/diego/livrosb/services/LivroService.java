@@ -126,4 +126,25 @@ public class LivroService {
 		return novaLista;
 	}
 
+	public List<Livro> obterPublicadosEm(AnoMes[] anoMes) {
+
+		List<Livro> banco = repository.findAll();
+
+		List<Livro> novaLista = new ArrayList<>();
+
+		for(AnoMes c: anoMes) {
+			
+			String ano = c.getAno();
+			String mes = c.getMes();
+			String anoMesFormatado = ano + "/" + mes;
+
+			for (Livro b : banco) {
+				if (anoMesFormatado.equalsIgnoreCase(b.getAnoMesDePublicacao().toString())) {
+					novaLista.add(b);
+				}
+			}
+		}
+
+		return novaLista;
+	}
 }
