@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -32,10 +33,12 @@ public class LivroService {
 		return obj.orElseThrow(() -> new RegistroNaoEncontradoException(id));
 	}
 
+	@Transactional
 	public Livro salvar(Livro obj) {
 		return repository.save(obj);
 	}
 
+	@Transactional
 	public void excluirPeloId(Long id) {
 		try {
 			repository.deleteById(id);
@@ -47,6 +50,7 @@ public class LivroService {
 		}
 	}
 
+	@Transactional
 	public Livro atualizar(Long id, Livro obj) {
 		try {
 			Livro entity = repository.getOne(id);
@@ -57,14 +61,16 @@ public class LivroService {
 			throw new RegistroNaoEncontradoException(id);
 		}
 	}
-
+	
+	@Transactional
 	private void atualizarDados(Livro entity, Livro obj) {
 		entity.setTitulo(obj.getTitulo());
 		entity.setNumeroDePaginas(obj.getNumeroDePaginas());
 		entity.setPublicadoEm(obj.getPublicadoEm());
 		entity.setPrecoDeVenda(obj.getPrecoDeVenda());
 	}
-
+	
+	@Transactional
 	public void excluir(Livro obj) {
 		try {
 			repository.delete(obj);
@@ -97,6 +103,7 @@ public class LivroService {
 		}
 	}
 
+	@Transactional
 	public void excluirTodos() {
 		repository.deleteAll();
 
